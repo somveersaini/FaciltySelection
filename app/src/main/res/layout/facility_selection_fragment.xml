@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="com.sam.faciltyselection.viewmodel.ErrorState"/>
+        <import type="com.sam.faciltyselection.viewmodel.SuccessState"/>
+        <import type="com.sam.faciltyselection.viewmodel.LoadingState"/>
+        <variable name="viewState" type="com.sam.faciltyselection.viewmodel.FacilitySelectionViewState"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/list_screen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <include android:id="@+id/content"
+                 bind:enabled="@{viewState instanceof SuccessState}"
+                 layout="@layout/content_layout"/>
+
+        <include android:id="@+id/loading_view"
+                 layout="@layout/loading_layout"
+                 bind:enabled="@{viewState instanceof LoadingState}"/>
+
+        <include android:id="@+id/error_view"
+                 bind:enabled="@{viewState instanceof ErrorState}"
+                 layout="@layout/error_layout"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
